@@ -1,0 +1,24 @@
+{
+  "name": "viorelshop-backend",
+  "version": "1.0.0",
+  "description": "Backend API pentru ViorelShop - Aplicație E-Commerce dezvoltată de Jipeanu Viorel",
+  "author": "Jipeanu Viorel",
+  "main": "index.js",
+  "scripts": {
+    "start": "node simple-server.js",
+    "dev": "nodemon simple-server.js",
+    "build": "echo 'Build complete'",
+    "prisma": "prisma"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.0",
+    "prisma": "^5.9.0",
+    "@prisma/client": "^5.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}

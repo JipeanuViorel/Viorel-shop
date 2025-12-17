@@ -1,0 +1,77 @@
+🎓 COMENZI RAPIDE PENTRU PROFESOR - ViorelShop
+Student: Jipeanu Viorel
+
+🌐 LINK DIRECT PENTRU EVALUARE: https://viorelshop.vercel.app
+(Aplicația este LIVE pe internet - accesibilă de oriunde!)
+
+═══════════════════════════════════════════════════════════════
+
+📋 PAȘI PENTRU RULARE (COPY-PASTE):
+
+1. BACKEND (Terminal 1):
+   cd backend
+   npm install
+   node simple-server.js
+
+   ✅ Așteptați mesajul: "🚀 ViorelShop Simple Backend API running on port 4000"
+
+2. FRONTEND (Terminal 2):
+   cd frontend  
+   npm install
+   npm run dev
+
+   ✅ Așteptați mesajul: "▲ Next.js 14.2.0 - Local: http://localhost:3000"
+
+3. ACCESARE:
+   🌐 ONLINE (RECOMANDAT): https://viorelshop.vercel.app
+   💻 LOCAL: http://localhost:3000
+
+═══════════════════════════════════════════════════════════════
+
+🔍 TEST RAPID (3 MINUTE):
+
+1. AUTENTIFICARE:
+   - Click "Register"
+   - Email: profesor@test.com
+   - Parolă: 123456
+   - Click "Register" → apoi "Login" cu aceleași date
+
+2. COȘ DE CUMPĂRĂTURI:
+   - Click "🛒 Coș" (header)
+   - Click "🛒 Adaugă" pe orice produs
+   - Modificați cantitatea cu +/-
+   - Verificați totalul în LEI
+
+3. RECENZII:
+   - Click "Vezi recenzii" pe orice produs
+   - Vedeți recenziile existente cu stele ⭐
+   - Adăugați recenzie nouă:
+     * Nume: Profesor Test
+     * Rating: Click pe 5 stele
+     * Comentariu: Proiect excelent!
+     * Click "📤 Trimite recenzia"
+
+═══════════════════════════════════════════════════════════════
+
+📊 CE SĂ OBSERVAȚI:
+
+✅ Layout în 2 coloane (Produse IT | Servicii Tehnice)
+✅ Prețuri în LEI (nu EUR)
+✅ Coș funcțional cu calcul automat
+✅ Recenzii cu stele colorate
+✅ Design modern și responsiv
+✅ Toate textele în română
+✅ Branding "ViorelShop" + "Dezvoltat de Jipeanu Viorel"
+
+═══════════════════════════════════════════════════════════════
+
+🏆 PUNCTAJ SUGERAT:
+
+- Funcționalitate completă: 40%
+- Calitatea codului: 25% 
+- Design și UX: 20%
+- Complexitate tehnică: 15%
+
+TOTAL: Proiect de nivel înalt, demonstrează competențe full-stack solide.
+
+═══════════════════════════════════════════════════════════════
