@@ -1,7 +1,7 @@
 {
   "name": "viorelshop-frontend",
   "version": "1.0.0",
-  "description": "Frontend pentru ViorelShop - Aplicație E-Commerce dezvoltată de Jipeanu Viorel",
+  "description": "ViorelShop Frontend",
   "author": "Jipeanu Viorel",
   "private": true,
   "scripts": {

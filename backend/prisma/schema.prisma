@@ -1,5 +1,5 @@
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -13,9 +13,23 @@ model User {
   password String
 }
 
+
 model Product {
-  id          Int     @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
-  description String?
   price       Float
+  description String
+  category    String
+  type        String
+  reviews     Review[]
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id])
+  userName  String
+  rating    Int
+  comment   String
+  date      DateTime @default(now())
 }
