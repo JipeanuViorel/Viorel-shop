@@ -14,7 +14,7 @@ const seedProducts = [
   { name: 'Monitor Gaming 27"', price: 750, description: 'Monitor Gaming 144Hz, 27 inch, 1ms', category: 'produse', type: 'monitor' },
   { name: 'Tastatura Mecanica RGB', price: 280, description: 'Tastatura mecanica cu iluminare RGB', category: 'produse', type: 'tastatura' },
   { name: 'Tastatura Wireless', price: 150, description: 'Tastatura wireless, baterie reincarcabila', category: 'produse', type: 'tastatura' },
-  { name: 'Mouse Gaming RGB', price: 120, description: 'Mouse gaming cu senzor optic 3200 DPI', category: 'produse', type: 'mouse' },
+
   { name: 'Mouse Wireless', price: 85, description: 'Mouse wireless ergonomic, baterie 12 luni', category: 'produse', type: 'mouse' },
   { name: 'Depanare PC Desktop', price: 80, description: 'Diagnosticare si reparare PC desktop', category: 'servicii', type: 'depanare-pc' },
   { name: 'Depanare PC Laptop', price: 100, description: 'Diagnosticare si reparare laptop', category: 'servicii', type: 'depanare-pc' },
