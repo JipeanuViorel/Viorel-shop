@@ -24,14 +24,12 @@ const seedProducts = [
 ];
 
 async function seed() {
-  const count = await prisma.product.count();
-  if (count === 0) {
-    console.log('Seeding products...');
-    for (const p of seedProducts) {
-      await prisma.product.create({ data: p });
-    }
-    console.log('Seeding complete.');
+  console.log('Clearing and reseeding products...');
+  await prisma.product.deleteMany({});
+  for (const p of seedProducts) {
+    await prisma.product.create({ data: p });
   }
+  console.log('Seeding complete.');
 }
 
 app.use(cors({
