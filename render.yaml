@@ -1,5 +1,4 @@
 services:
-  # Backend API
   - type: web
     name: viorelshop-backend
     env: node
@@ -14,8 +13,7 @@ services:
       - key: NODE_ENV
         value: production
 
-  # Frontend Static Site
-  - type: static
+  - type: static_site
     name: viorelshop-frontend
     rootDir: frontend
     buildCommand: npm install && npm run build
