@@ -1,9 +1,32 @@
 services:
+  # Backend API
   - type: web
-    name: viorel-shop
+    name: viorelshop-backend
     env: node
-    buildCommand: npm install
-    startCommand: npm start
+    rootDir: backend
+    buildCommand: npm install && npx prisma generate
+    startCommand: node server.js
     envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: viorelshop-db
+          property: connectionString
       - key: NODE_ENV
         value: production
+
+  # Frontend Static Site
+  - type: static
+    name: viorelshop-frontend
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    publishPath: out
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: viorelshop-backend
+          property: host
+
+databases:
+  - name: viorelshop-db
+    plan: free
