@@ -13,11 +13,12 @@ services:
       - key: NODE_ENV
         value: production
 
-  - type: static_site
+  - type: web
     name: viorelshop-frontend
+    runtime: static
     rootDir: frontend
     buildCommand: npm install && npm run build
-    publishPath: out
+    staticPublishPath: out
     envVars:
       - key: NEXT_PUBLIC_API_URL
         fromService:
