@@ -35,7 +35,7 @@ async function seed() {
 }
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://viorelshop.vercel.app'],
+  origin: ['http://localhost:3000', 'https://viorelshop.vercel.app', 'https://viorelshop-frontend.onrender.com'],
   credentials: true
 }));
 app.use(express.json());

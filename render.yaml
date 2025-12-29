@@ -22,10 +22,7 @@ services:
     staticPublishPath: out
     envVars:
       - key: NEXT_PUBLIC_API_URL
-        fromService:
-          type: web
-          name: viorelshop-backend
-          property: host
+        value: https://viorelshop-backend.onrender.com
 
 databases:
   - name: viorelshop-db
