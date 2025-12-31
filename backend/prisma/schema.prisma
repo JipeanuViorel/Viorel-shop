@@ -33,3 +33,20 @@ model Review {
   comment   String
   date      DateTime @default(now())
 }
+
+model Order {
+  id              Int      @id @default(autoincrement())
+  firstName       String
+  lastName        String
+  phone           String
+  email           String
+  address         String?
+  city            String?
+  county          String?
+  deliveryMethod  String
+  paymentMethod   String
+  easyboxLocation String?
+  total           Float
+  items           String
+  createdAt       DateTime @default(now())
+}

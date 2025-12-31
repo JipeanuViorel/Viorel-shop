@@ -35,10 +35,22 @@ async function seed() {
 }
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://viorelshop.vercel.app', 'https://viorelshop-frontend.onrender.com'],
+  origin: '*',
   credentials: true
 }));
 app.use(express.json());
+
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  if (!token) return res.status(401).json({ error: 'Unauthorized' });
+
+  jwt.verify(token, JWT_SECRET, (err, user) => {
+    if (err) return res.status(403).json({ error: 'Forbidden' });
+    req.user = user;
+    next();
+  });
+};
 
 app.post('/api/auth/register', async (req, res) => {
   const { email, password } = req.body;
@@ -80,12 +92,22 @@ app.get('/api/products', async (req, res) => {
   res.json(products);
 });
 
+app.post('/api/products', authenticateToken, async (req, res) => {
+  const { name, price, description, category, type } = req.body;
+  try {
+    const product = await prisma.product.create({
+      data: { name, price: parseFloat(price), description, category, type }
+    });
+    res.json(product);
+  } catch (e) {
+    res.status(500).json({ error: 'Error creating product' });
+  }
+});
+
 app.get('/api/reviews', async (req, res) => {
   const reviews = await prisma.review.findMany({
     include: { product: true }
   });
-  // Transform to match frontend expectations if needed, but schema matches closely
-  // Frontend expects: { productId, userName, rating, comment, date, id }
   res.json(reviews);
 });
 
@@ -108,6 +130,38 @@ app.post('/api/reviews', async (req, res) => {
     res.json(newReview);
   } catch (e) {
     res.status(500).json({ error: 'Error creating review' });
+  }
+});
+
+app.post('/api/orders', async (req, res) => {
+  const {
+    firstName, lastName, phone, email, address, city,
+    county, deliveryMethod, paymentMethod, easyboxLocation,
+    total, items
+  } = req.body;
+
+  try {
+    const order = await prisma.order.create({
+      data: {
+        firstName, lastName, phone, email, address, city,
+        county, deliveryMethod, paymentMethod, easyboxLocation,
+        total: parseFloat(total),
+        items: JSON.stringify(items)
+      }
+    });
+    res.json({ success: true, orderId: order.id });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Error creating order' });
+  }
+});
+
+app.post('/api/seed', async (req, res) => {
+  try {
+    await seed();
+    res.json({ message: 'Seeding complete' });
+  } catch (e) {
+    res.status(500).json({ error: 'Seeding failed' });
   }
 });
 
@@ -140,11 +194,19 @@ app.get('/api/analytics', async (req, res) => {
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'OK',
-    message: 'ViorelShop API Ready with PostgreSQL!'
+    message: 'ViorelShop API Ready!'
   });
 });
 
-app.listen(PORT, async () => {
+const server = app.listen(PORT, async () => {
   await seed();
   console.log(`ViorelShop API running on port ${PORT}`);
+});
+
+server.on('error', (e) => {
+  if (e.code === 'EADDRINUSE') {
+    console.error(`Eroare: Portul ${PORT} este deja folosit. Inchide celalalt progam.`);
+  } else {
+    console.error(e);
+  }
 });

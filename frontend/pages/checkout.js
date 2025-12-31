@@ -39,16 +39,38 @@ export default function Checkout() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (cart.length === 0) return;
 
-        // Simulate order placement
-        alert(`Comandă plasată cu succes!\nMetoda plată: ${paymentMethod}\nLivrare: ${deliveryMethod}\nTotal: ${finalTotal} LEI`);
+        const orderData = {
+            ...formData,
+            deliveryMethod,
+            paymentMethod,
+            easyboxLocation,
+            total: finalTotal,
+            items: cart
+        };
 
-        // Clear cart and redirect
-        localStorage.removeItem('viorel_cart');
-        router.push('/');
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'}/api/orders`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(orderData)
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                alert(`Comandă plasată cu succes!\nID Comandă: ${result.orderId}\nTotal: ${finalTotal} LEI`);
+                localStorage.removeItem('viorel_cart');
+                router.push('/');
+            } else {
+                alert('Eroare la plasarea comenzii. Vă rugăm să încercați din nou.');
+            }
+        } catch (error) {
+            console.error('Order submission error:', error);
+            alert('Eroare de conexiune la server.');
+        }
     };
 
     if (loading) return <div className="p-10 text-center">Se încarcă...</div>;
